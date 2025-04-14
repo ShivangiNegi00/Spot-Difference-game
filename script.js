@@ -38,28 +38,11 @@ const sounds = {
 // Load game configuration from JSON file
 async function loadGameConfig() {
     try {
-        // In a real application, you would load from an actual JSON file
-        // For this example, we'll use a hardcoded JSON object
-        const config = {
-            "gameTitle": "Spot the Difference - Jungle Scene",
-            "images": {
-                "image1": "imageM21.jpg",
-                "image2": "imageM22.jpg"
-            },
-            "differences": [
-                { "x": 98, "y": 18, "width": 40, "height": 40 }, //branch
-                { "x": 145, "y": 71, "width": 30, "height": 30 }, //cloud
-                { "x": 253, "y": 40, "width": 35, "height": 35 }, //leaf
-                { "x": 213, "y": 129, "width": 45, "height": 45 }, //apple
-                { "x": 163, "y": 339, "width": 25, "height": 25 } //daisy
-            ]
-        };
         
-        return config;
+            const response = await fetch('./game-config.json');
+            const data = await response.json();
+            return data;
         
-        // In a real application, you would use something like:
-        // const response = await fetch('game-config.json');
-        // return await response.json();
     } catch (error) {
         console.error('Error loading game configuration:', error);
         elements.messageBox.textContent = 'Failed to load game configuration.';
@@ -69,10 +52,8 @@ async function loadGameConfig() {
     }
 }
 
-// Initialize the game
 async function initGame() {
     // Load game configuration
-
     gameState.config = await loadGameConfig();
     if (!gameState.config) return;
     
@@ -89,6 +70,15 @@ async function initGame() {
         new Promise(resolve => elements.image2.onload = resolve)
     ]);
     
+    // Calculate actual coordinates based on image dimensions
+    const imageWidth = elements.image1.width;
+    const imageHeight = elements.image1.height;
+    
+    // Convert percentage-based coordinates to pixel coordinates
+    gameState.config.differences = gameState.config.differences.map(diff => {
+        return calculateActualCoordinates(diff, imageWidth, imageHeight);
+    });
+    
     // Hide loading indicator and show images
     elements.loading.style.display = 'none';
     elements.imagesContainer.style.display = 'flex';
@@ -103,6 +93,7 @@ async function initGame() {
     // Start timer
     startTimer();
 }
+
 
 // Handle image clicks
 function handleImageClick(event) {
@@ -209,6 +200,19 @@ function gameCompleted() {
     });
 }
 
+// Calculate actual coordinates based on image size
+function calculateActualCoordinates(difference, imageWidth, imageHeight) {
+    return {
+      x: Math.round((difference.xPercent / 100) * imageWidth),
+      y: Math.round((difference.yPercent / 100) * imageHeight),
+      width: Math.round((difference.widthPercent / 100) * imageWidth),
+      height: Math.round((difference.heightPercent / 100) * imageHeight)
+    };
+  }
+
+
+
+  
 // Reset the game
 function resetGame() {
     

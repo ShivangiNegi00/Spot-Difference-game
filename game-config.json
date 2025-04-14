@@ -1,0 +1,14 @@
+{
+    "gameTitle": "Spot the Difference - Jungle Scene",
+    "images": {
+      "image1": "imageM21.jpg",
+      "image2": "imageM22.jpg"
+    },
+    "differences": [
+      { "xPercent": 20.4, "yPercent": 3.6, "widthPercent": 8.3, "heightPercent": 8.0, "description": "branch" },
+      { "xPercent": 30.2, "yPercent": 14.2, "widthPercent": 6.3, "heightPercent": 6.0, "description": "cloud" },
+      { "xPercent": 52.7, "yPercent": 8.0, "widthPercent": 7.3, "heightPercent": 7.0, "description": "leaf" },
+      { "xPercent": 44.4, "yPercent": 25.8, "widthPercent": 9.4, "heightPercent": 9.0, "description": "apple" },
+      { "xPercent": 34.0, "yPercent": 67.8, "widthPercent": 5.2, "heightPercent": 5.0, "description": "daisy" }
+    ]
+  }
