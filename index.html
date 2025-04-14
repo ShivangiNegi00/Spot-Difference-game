@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spot the Difference</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 id="game-title">Spot the Difference</h1>
+        
+        <div class="game-controls">
+            <div class="score-timer">
+                <div class="score">Differences Found: <span id="score">0</span>/<span id="total-differences">0</span></div>
+                <div class="timer">Time: <span id="time">00:00</span></div>
+            </div>
+            <button id="reset-btn" class="btn">Reset Game</button>
+        </div>
+        
+        <div id="message" class="message"></div>
+        
+        <div class="game-area">
+            <div id="loading" class="loading">Loading game...</div>
+            <div id="images-container" class="images-container" style="display: none;">
+                <div class="image-wrapper">
+                    <img id="image1" class="game-image" alt="Image 1">
+                </div>
+                <div class="image-wrapper">
+                    <img id="image2" class="game-image" alt="Image 2" >
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
